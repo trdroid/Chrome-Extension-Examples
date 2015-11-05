@@ -1,0 +1,14 @@
+div {
+    background-color: grey;
+    height: 100px;
+    width: 100px; 
+    text-align: center;               
+}
+
+div:hover { 
+    background-color: red; 
+}
+
+div {
+    transition: background-color 2s;
+}
