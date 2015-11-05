@@ -21,9 +21,9 @@ The identifier is determined by the hash of the public key without the need for 
 because public keys are randomly generated, the chance of a collision is extremely narrow. 
 
 
-### Hosting on the Chrome Extension Gallery
+### Hosting on the Chrome Extensions Gallery
 
-On publishing an extension to the gallery, its CRX file is generated ??? 
+On publishing an extension to the gallery, its CRX file is generated 
 
 To release a new version of the extension, login, upload new source files and hit the publish button
 
@@ -41,15 +41,13 @@ Include an update_url entry in the manifest file
 
 manifest.json 
 
+```json
 {
-
-&nbsp;...
-
-&nbsp;"update_url": "http://mydomain.com/myextension.xml"
-
-&nbsp;...
-
+  ...
+  "update_url": "http://mydomain.com/myextension.xml"
+  ...
 }
+```
 
 On providing the update_url, Chrome checks the URL every few hours for an XML file which lists 
 the most recent version of the extension and where it should be downloaded from. 
