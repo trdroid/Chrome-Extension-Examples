@@ -62,7 +62,7 @@ On self hosting an extension, make sure that the
 When installing an extension (the CRX file), Chrome extracts the public key, the signature and the zipped contents 
 and verifies that the signature is valid using the public key
 
-For this reason, Chrome can fetch updated CRX files over a plain non ssh connection because it will 
+For this reason, Chrome can fetch CRX files over a plain non-ssh connection because it would 
 check the signature inside the CRX file before installing it
 
 
