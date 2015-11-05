@@ -68,7 +68,7 @@ check the signature inside the CRX file before installing it
 
 ### Updating an Extension
 
-When hosted on the gallery, providing an updated extension would suffice and the gallery would take care of 
+When hosted on the gallery, publishing an updated extension would suffice and the gallery would take care of 
 auto updating the extension 
 
 When self-hosted, providing an update_url in the manifest file would suffice. 
