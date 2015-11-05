@@ -1,7 +1,7 @@
 {
 	"manifest_version" : 2,
 
-	"name" : "Hello World",
+	"name" : "Hello World from manifest",
 	"description": "A Simple HelloWorld Extension",
 	"version"	: "1.0",
 
