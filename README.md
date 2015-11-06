@@ -4,7 +4,7 @@
 
 Chrome Extensions are packaged into CRX files. 
 
-Extensions are just like web pages and Chrome runs them in sub-processes just like it does for web pages.
+Extensions are just like web pages that Chrome runs in sub-processes.
 
 Each extension is associated with a public/private key pair. 
 
@@ -14,15 +14,26 @@ Each extension is associated with a public/private key pair.
 
 > Signature = Zipped Content signed with the private key
 
-Extension Folder's content could be 
-* manifest.json (is a MUST and it should be called that ONLY)
-* background.html 
-* content_scripts.js
-* JavaScript libraries
+The contents of an extension is stored in a folder
+
+An extension should contains a manifest file called manifest.json
+
+It could optionally contain:
+* HTML pages (custom pages, background.html etc. HTML pages need not be provided if the extension is a theme)
+* JavaScript files including libraries (eg. content scripts)
 * images 
 * Flash movies etc.
 
 NOTE: The HTML pages cannot contain embedded scripts
+
+###Extension UI
+
+An extension UI could
+* Show pop-up bubbles (for Browser Action extensions) that are made with HTML and are sized dynamically based on the content
+* have an options page with configuration options
+* have an override page
+* display other HTML files of the extension using tabs.create or window.open()
+
 
 ### Extension IDs 
 
@@ -33,12 +44,17 @@ The extension ID is used as the host because of which each extension gets its ow
 The identifier is determined by the hash of the public key without the need for any central authority and
 because public keys are randomly generated, the chance of a collision is extremely narrow
 
+The extension ID of an unpackaged app would be different than a packaged app. Even with an unpackaged app, the ID would be different based on the folder it is loaded from. Use the *@@extension_id* predefined message to use the ID in the extension code, say for accessing an extension resource with the URL format chrome-extension://<extensionID>/<resource path>
+
+After an extension is packed into a CRX file (by say, publishing it to the gallery), the generated permanent extension ID can be used to replace all occurrences of @@extension_id
 
 ### Hosting on the Chrome Extensions Gallery
 
+An extension can be submitted to the gallery using the Chrome Developer Dashboard.
+
 The gallery requires an extension to be uploaded as a zip file. On publishing, a CRX file is generated from the zip file
 
-To release a new version of the extension, login, upload new source files and hit the publish button
+To release a new version of the extension, just upload the new source files to the gallery
 
 The gallery
 * Creates and stores the private key of the extension
@@ -72,12 +88,10 @@ On self hosting an extension, make sure that the
 
 ### Installing an Extension 
 
-When installing an extension (the CRX file), Chrome extracts the public key, the signature and the zipped contents 
-and verifies that the signature is valid using the public key
+When installing an extension (the CRX file), Chrome extracts the public key, the signature and the zipped contents, verifies that the signature is valid using the public key, reads the manifest file and integrates the extension into the browser
 
 For this reason, Chrome can fetch CRX files over a plain non-ssh connection because it would 
 check the signature inside the CRX file before installing it
-
 
 ### Updating an Extension
 
@@ -93,10 +107,10 @@ When self-hosted, providing an update_url in the manifest file would suffice.
 
 Browser Actions 
 ---------------
-A Browser Action is an extension's UI with a simple button which is added to the main tool bar to the right of the Omni box. 
+A Browser Action is an extension's UI with a simple button which is added to the main tool bar to the right of the Omni box.
 They appear in the tool bar of every tab
 
-The extension can 
+A Browser Action extension can 
 * Change the icon on the button depending on the content on the current page
 * Animate the icon
 * Display badges over icons 
@@ -120,6 +134,28 @@ A Content Script has direct contact with web pages, but has less privileges when
 
 A Content Script cannot directly modify the browser UI and the DOM of the HTML pages that are packaged with the extension like the UI and the background pages can. 
 
+Background Pages
+----------------
+A background page is a regular HTML that runs invisibly in the background of the extension it is packaged with. It is the preferred part of the extension to hold the core logic, the JavaScript code that will be used to control the extension features across browser windows when its active. Additionally, it can also hold the state of the extension while the extension is active.  
+
+*Categories*
+* Persistent Background Pages
+* Event Pages
+
+####Persistent Background Pages
+
+A Persistent Background Page is always open as it runs persistently in the background and could be resource intensive
+	
+It could be used to 	
+* coordinate tasks across extension components and long running tasks
+* manage state of an extension 
+
+####Event Pages	
+
+Event pages are loaded only when certain events to which they are registered with occur.
+
+<hr>
+
 ### Extension Message Passing
 
 Extension Message Passing allows different components of an extension to communicate with each other
@@ -130,9 +166,11 @@ Usually, message passing is used to send messages between a content script and a
 
 An extension can communicate with another extension, provided it knows the ID of the extension it tries to send messages to. 
 
+NOTE: UI pages can share information by manipulating properties on their DOMs and also by invoking functions on background pages.
+
 *Flow*
 
-Consider a scenario where a page action for maps should appear in the omni box if a web page contains an address.
+Consider a scenario where a page action for maps has to appear in the omni box if a web page contains an address.
 
 Use a content script to examine the content of a web page for an address
 
@@ -147,12 +185,6 @@ to a background page to update the UI of the browser to display a page action in
 	
   });
 ```
-
-<hr>
-
-Background Pages
-----------------
-A background page is a regular HTML that runs invisibly in the background of the extension it is packaged with. It is the preferred part of the extension that should contain the core logic. Additionally, it can also hold the state of the extension while the extension is active.  
 
 <hr>
 
@@ -196,7 +228,19 @@ For more information on Extensions API, refer to https://developer.chrome.com/ex
 
 ### Debugging an extension
 
+To see a list of extensions 
+
+chrome://extensions
+
+To see a list of plugins 
+
+chrome://plugins
+
 Visit chrome-extension://<extension ID>/<html-page-of-extension>.html and inspect element
+
+*To see a list of active background pages*
+
+Chrome Options -> Tools -> Task Manager
 
 
 
