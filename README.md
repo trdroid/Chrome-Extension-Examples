@@ -120,33 +120,33 @@ The extensions API is organized into the following modules.
  
 <b>chrome.extension.*</b>
 
-  Enables communication between extension components by sending messages
+    Enables communication between extension components by sending messages
   
-  Resolves URLs of the extension files
+    Resolves URLs of the extension files
 
 <b>chrome.browserAction.*</b> 
 
-  Allows setting appearance of Browser Actions and their badges
+    Allows setting appearance of Browser Actions and their badges
 
 <b>chrome.pageAction.*</b>  
 
-  Allows enabling and disabling Page Actions
+    Allows enabling and disabling Page Actions
 
 <b>chrome.windows.*</b> 
 
-  Allows opening, closing, looking up and updating browser windows
+    Allows opening, closing, looking up and updating browser windows
   
-  *requires tabs permission*
+    *requires tabs permission*
 
 <b>chrome.tabs.*</b> 
 
-  *requires tabs permission*
+    *requires tabs permission*
 
 <b>chrome.bookmarks.*</b> 
 
-  Allows reading from and writing to the users' bookmarks tree
+    Allows reading from and writing to the users' bookmarks tree
   
-  *requires bookmarks permission*
+    *requires bookmarks permission*
   
 
 
