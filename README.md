@@ -4,6 +4,8 @@
 
 Chrome Extensions are packaged into CRX files. 
 
+Extensions are just like web pages and Chrome runs them in sub-processes just like it does for web pages.
+
 Each extension is associated with a public/private key pair. 
 
 > CRX file = Public Key  |  signature | Zipped Extension Content 
@@ -13,7 +15,7 @@ Each extension is associated with a public/private key pair.
 > Signature = Zipped Content signed with the private key
 
 Extension Folder's content could be 
-* manifest.json 
+* manifest.json (is a MUST and it should be called that ONLY)
 * background.html 
 * content_scripts.js
 * JavaScript libraries
@@ -22,15 +24,17 @@ Extension Folder's content could be
 
 ### Extension IDs 
 
-Each extension has a Global Unique Identifier of 32 characters to avoid conflicts with other extensions. 
+Each extension has a Global Unique Identifier of 32 characters to avoid conflicts with other extensions
+
+The extension ID is used as the host because of which each extension gets its own unique origin. This isolates an extension from other extensions, web pages and the browser
 
 The identifier is determined by the hash of the public key without the need for any central authority and
-because public keys are randomly generated, the chance of a collision is extremely narrow. 
+because public keys are randomly generated, the chance of a collision is extremely narrow
 
 
 ### Hosting on the Chrome Extensions Gallery
 
-On publishing an extension to the gallery, its CRX file is generated 
+The gallery requires an extension to be uploaded as a zip file. On publishing, a CRX file is generated from the zip file
 
 To release a new version of the extension, login, upload new source files and hit the publish button
 
@@ -109,6 +113,14 @@ Content Scripts
 A Content Script is any arbitrary CSS and JavaScript that are injected into selected pages. They are similar to user scripts. 
 
 A Content Script uses in-page UI and takes up no UI in the browser. 
+
+A Content Script has direct contact with web pages, but has less privileges when compared to a background page which has more privileges but is isolated from direct contact with web pages
+
+<hr>
+
+Background Pages
+----------------
+A background page is a regular HTML that runs invisibly in the background of the extension it is packaged with. The core logic of the extension could be held in a background page. Additionally, it can also hold the state of the extension while the extension is active.  
 
 <hr>
 
