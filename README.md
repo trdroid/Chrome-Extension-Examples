@@ -12,6 +12,13 @@ Each extension is associated with a public/private key pair.
 
 > Signature = Zipped Content signed with the private key
 
+Extension Folder's content could be 
+* manifest.json 
+* background.html 
+* content_scripts.js
+* JavaScript libraries
+* images 
+* Flash movies etc.
 
 ### Extension IDs 
 
@@ -73,6 +80,74 @@ auto updating the extension
 
 When self-hosted, providing an update_url in the manifest file would suffice. 
 
+###Types of Extensions
+* Browser Actions
+* Page Actions
+* Content Scripts
+
+Browser Actions 
+---------------
+A Browser Action is an extension's UI with a simple button which is added to the main tool bar to the right of the Omni box. 
+They appear in the tool bar of every tab
+
+The extension can 
+* Change the icon on the button depending on the content on the current page
+* Animate the icon
+* Display badges over icons 
+* Show pop-up bubbles that are made with HTML and are sized dynamically based on the content
+
+Page Actions 
+------------
+A Page Action is an extension's UI that resides in the Omni box. They selectively appear in the omni box based on the content of a page and can be toggled on or off for each tab
+
+Page Actions can display pop ups but they do not support badges.
+
+> NOTE: An extension can ONLY have one type of UI surface or the other
+
+Content Scripts 
+---------------
+A Content Script is any arbitrary CSS and JavaScript that are injected into selected pages. They are similar to user scripts. 
+
+A Content Script uses in-page UI and takes up no UI in the browser. 
+
+<hr>
+
+# Extension API
+
+<b>*chrome*</b> is the name of the top level object
+
+The extensions API is organized into the following modules. 
+ 
+<b>chrome.extension.*</b>
+
+  Enables communication between extension components by sending messages
+  
+  Resolves URLs of the extension files
+
+<b>chrome.browserAction.*</b> 
+
+  Allows setting appearance of Browser Actions and their badges
+
+<b>chrome.pageAction.*</b>  
+
+  Allows enabling and disabling Page Actions
+
+<b>chrome.windows.*</b> 
+
+  Allows opening, closing, looking up and updating browser windows
+  
+  *requires tabs permission*
+
+<b>chrome.tabs.*</b> 
+
+  *requires tabs permission*
+
+<b>chrome.bookmarks.*</b> 
+
+  Allows reading from and writing to the users' bookmarks tree
+  
+  *requires bookmarks permission*
+  
 
 
 
