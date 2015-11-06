@@ -26,9 +26,6 @@ Some examples of when an event page is loaded are when
 * a content script or another extension sends a message
 * another view in the extension (eg. a popup) calls runtime.getBackgroundPage
 
-!!!!!!!!!!!!!!!!!!!!!! Question !!!!!!!!!!!!!!!!!!!!!!!!!!
-Does an extension register for events WITHIN an event page?
-
 ### When is an event page unloaded?
 
 An event page will be unloaded when 
