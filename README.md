@@ -118,17 +118,41 @@ A Content Script uses in-page UI and takes up no UI in the browser.
 
 A Content Script has direct contact with web pages, but has less privileges when compared to a background page which has more privileges but is isolated from direct contact with web pages. 
 
-A Content Script cannot directly modify the DOM of the HTML pages that are packaged with the extension like the UI and the background pages can. 
+A Content Script cannot directly modify the browser UI and the DOM of the HTML pages that are packaged with the extension like the UI and the background pages can. 
 
 ### Extension Message Passing
 
+Extension Message Passing allows different components of an extension to communicate with each other
+
 In order to modify the UI or access an extension API, the Content Script can send messages to the parent extension to get the work done by the pages (the privileged parts) of the extension. Similarly, a UI page or a background page can send messages to a content script to perform actions on the web page.
+
+Usually, message passing is used to send messages between a content script and a background page, but it can be used to enable communication between any two pages in the extension.
+
+An extension can communicate with another extension, provided it knows the ID of the extension it tries to send messages to. 
+
+*Flow*
+
+Consider a scenario where a page action for maps should appear in the omni box if a web page contains an address.
+
+Use a content script to examine the content of a web page for an address
+
+If an address is found, the content script sends a message using 
+```javascript
+chrome.extension.sendRequest(message) 
+```
+to a background page to update the UI of the browser to display a page action in the omni box. In the background page, messages can be received using 
+
+```javascript
+  chrome.extension.onRequest.addListener(function(feeds, sender, sendResponse) {
+	
+  });
+```
 
 <hr>
 
 Background Pages
 ----------------
-A background page is a regular HTML that runs invisibly in the background of the extension it is packaged with. The core logic of the extension could be held in a background page. Additionally, it can also hold the state of the extension while the extension is active.  
+A background page is a regular HTML that runs invisibly in the background of the extension it is packaged with. It is the preferred part of the extension that should contain the core logic. Additionally, it can also hold the state of the extension while the extension is active.  
 
 <hr>
 
@@ -170,6 +194,9 @@ The extensions API is organized into the following modules.
   
 For more information on Extensions API, refer to https://developer.chrome.com/extensions/api_index
 
+### Debugging an extension
+
+Visit chrome-extension://<extension ID>/<html-page-of-extension>.html and inspect element
 
 
 
