@@ -26,12 +26,8 @@ Some examples of when an event page is loaded are when
 * a content script or another extension sends a message
 * another view in the extension (eg. a popup) calls runtime.getBackgroundPage
 
-Questions 
-
-~~~~~~~~~~
-
+!!!!!!!!!!!!!!!!!!!!!! Question !!!!!!!!!!!!!!!!!!!!!!!!!!
 Does an extension register for events WITHIN an event page?
-
 
 ### When is an event page unloaded?
 
@@ -41,8 +37,6 @@ An event page will be unloaded when
 * all message ports are closed
 
 When an event page has to be unloaded, Chrome dispatches a *runtime.onSuspend* event, at which point the event page gets a few more seconds to handle this event before it is forcibly unloaded. If during this time, an event that would cause the event page to be loaded occurs, the suspension is cancelled and a *runtime.onSuspendCanceled* event is dispatched
-
-An occurrence of any one of the events that 
 
 Event Registration 
 ------------------
