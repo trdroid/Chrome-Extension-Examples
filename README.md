@@ -22,6 +22,8 @@ Extension Folder's content could be
 * images 
 * Flash movies etc.
 
+NOTE: The HTML pages cannot contain embedded scripts
+
 ### Extension IDs 
 
 Each extension has a Global Unique Identifier of 32 characters to avoid conflicts with other extensions
@@ -110,11 +112,17 @@ Page Actions can display pop ups but they do not support badges.
 
 Content Scripts 
 ---------------
-A Content Script is any arbitrary CSS and JavaScript that are injected into selected pages. They are similar to user scripts. 
+A Content Script is any arbitrary CSS and JavaScript that are injected into selected pages and executed similar to user scripts. It becomes part of the loaded page just like the user scripts. 
 
 A Content Script uses in-page UI and takes up no UI in the browser. 
 
-A Content Script has direct contact with web pages, but has less privileges when compared to a background page which has more privileges but is isolated from direct contact with web pages
+A Content Script has direct contact with web pages, but has less privileges when compared to a background page which has more privileges but is isolated from direct contact with web pages. 
+
+A Content Script cannot directly modify the DOM of the HTML pages that are packaged with the extension like the UI and the background pages can. 
+
+### Extension Message Passing
+
+In order to modify the UI or access an extension API, the Content Script can send messages to the parent extension to get the work done by the pages (the privileged parts) of the extension. Similarly, a UI page or a background page can send messages to a content script to perform actions on the web page.
 
 <hr>
 
