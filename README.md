@@ -136,18 +136,20 @@ The extensions API is organized into the following modules.
 
     Allows opening, closing, looking up and updating browser windows
   
-    *requires tabs permission*
+    requires tabs permission
 
 <b>chrome.tabs.*</b> 
 
-    *requires tabs permission*
+    requires tabs permission
 
 <b>chrome.bookmarks.*</b> 
 
     Allows reading from and writing to the users' bookmarks tree
   
-    *requires bookmarks permission*
+    requires bookmarks permission
   
+For more information on Extensions API, refer to https://developer.chrome.com/extensions/api_index
+
 
 
 
