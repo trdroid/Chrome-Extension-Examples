@@ -47,7 +47,7 @@ For detailed information, refer to https://developer.chrome.com/extensions/backg
 
 ### When is an event page loaded?
 
-Event Pages are loaded when needed and stay running as long as they is active.
+Event Pages are loaded when needed and stay running as long as they are active.
 
 Some examples of when an event page is loaded are when
 * an extension is installed or updated (the event page is loaded to register for events)
