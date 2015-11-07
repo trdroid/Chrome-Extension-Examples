@@ -6,7 +6,7 @@
 
 ##Persistent Background Pages
 
-A background page runs invisibly in an extension process to carry out long running tasks and maintain the state of an extension. It is always open. It is the ideal part of an extension to hold the core logic and its state. 
+A background page runs invisibly in an extension process to carry out long running tasks and maintain the state of an extension. It is always open. It is the ideal part of an extension to hold the core logic and the state of an extension. 
 
 An ideal approach is to design the UI of an extension (browser actions, page actions, options pages and other HTML pages) as dumb views that coordinate with a background page to obtain state information. A background page could hold the state of an extension and notify state changes to the views to reflect the changes the UI.
 
