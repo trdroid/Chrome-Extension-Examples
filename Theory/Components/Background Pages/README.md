@@ -10,7 +10,7 @@ A background page runs invisibly in an extension process to carry out long runni
 
 An ideal approach is to design the UI of an extension (browser actions, page actions, options pages and other HTML pages) as dumb views that coordinate with a background page. A background page could hold the state of an extension and notify state changes to the views to reflect the changes the UI.
 
-Only one instance of a background page can run in an extension process, but an extension using incognito split mode gets another instance for the incognito windows. 
+Only one instance of a background page can run in an extension process, but an extension using an incognito split mode gets another instance for the incognito windows. 
 
 ###Manifest
 
