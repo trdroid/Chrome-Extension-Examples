@@ -1,20 +1,49 @@
 #Background Pages
 
-A background page is a regular HTML that runs invisibly in the background of the extension it is packaged with. It is the preferred part of the extension to hold the core logic, the JavaScript code that will be used to control the extension features across browser windows when its active. Additionally, it can also hold the state of the extension while the extension is active.  
-
 *Categories*
 * Persistent Background Pages
 * Event Pages
 
-###Persistent Background Pages
+##Persistent Background Pages
 
-A Persistent Background Page is always open as it runs persistently in the background and could be resource intensive
+A background page runs invisibly in an extension process to carry out long running tasks and maintain the state of an extension. It is always open. It is the ideal part of an extension to hold the core logic and its state. 
+
+An ideal approach is to design the UI of an extension (browser actions, page actions, options pages and other HTML pages) as dumb views that coordinate with a background page to obtain state information. A background page could hold the state of an extension and notify state changes to the views to reflect the changes the UI.
+
+Only one instance of a background page can run in an extension process, but an extension using incognito split mode gets another instance for the incognito windows. 
+
+###Manifest
+
+*To register an HTML page*
+
+```javascript
+{
+	"name": "MyExtension"
 	
-It could be used to 	
-* coordinate tasks across extension components and long running tasks
-* manage state of an extension 
+	"background": {
+		"page": "a_background_page.html"
+	}
+}
+```
 
-#Event Pages	
+
+*To register scripts*
+
+In the following case, the extension system generates a background html page including the scripts mentioned in the "scripts" attribute
+
+```javascript
+{
+	"name": "MyExtension"
+	
+	"background": {
+		"scripts": ["a_background_script.js"]
+	}
+}
+```
+
+For detailed information, refer to https://developer.chrome.com/extensions/background_pages
+
+##Event Pages	
 
 ### When is an event page loaded?
 
@@ -41,4 +70,4 @@ An extension can register with Chrome to be notified when certain events occur b
 
 When an extension unregisters all its event listeners for an event by calling *removeListener*, Chrome no longer loads the event page for that event. 
 
-https://developer.chrome.com/extensions/event_pages#registration
+For detailed information, refer to https://developer.chrome.com/extensions/event_pages
